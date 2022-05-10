@@ -4,22 +4,24 @@ import model.UserPojo;
 
 public interface UserDao {
 
-	UserPojo getUserId(UserPojo UserPojo);
+	UserPojo getUserId(UserPojo userPojo);
 
-	UserPojo addUser(UserPojo UserPojo);
+	UserPojo getUserName(UserPojo userPojo);
 
-	UserPojo updateUser(UserPojo UserPojo);
+	UserPojo getUserPassword(UserPojo userPojo);
 
-	void deleteUser(UserPojo userId);
+	UserPojo getDeposit(UserPojo userPojo);
 
-	UserPojo getDeposit(UserPojo UserPojo);
+	UserPojo getWithdraw(UserPojo userPojo);
 
-	UserPojo getWithdraw(UserPojo UserPojo);
+	UserPojo getBlance(UserPojo userPojo);
 
+	UserPojo getTansaction(UserPojo userPojo);
 
+	UserPojo getMultipleAccount(UserPojo userPojo);
 
-	UserPojo getTansaction(UserPojo UserPojo);
+	UserPojo getJointAccount(UserPojo userPojo);
 
-	UserPojo getBlance(int userId);
+	UserPojo getTranferFund(UserPojo userPojo);
 
 }

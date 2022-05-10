@@ -1,13 +1,14 @@
 package dao;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import model.UserPojo;
 
-public class UserDaoCollectionImpl implements UserDao{
+public class UserDaoCollectionImpl implements UserDao {
 
-	List<UserPojo> viewBlance = new ArrayList <UserPojo>();
+	List<UserPojo> viewBlance = new ArrayList<UserPojo>();
 
 	public UserDaoCollectionImpl() {
 		super();
@@ -15,61 +16,63 @@ public class UserDaoCollectionImpl implements UserDao{
 	}
 
 	@Override
-	public UserPojo getUserId(UserPojo UserPojo) {
+	public UserPojo getUserId(UserPojo userPojo) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public UserPojo addUser(UserPojo UserPojo) {
+	public UserPojo getUserName(UserPojo userPojo) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public UserPojo updateUser(UserPojo UserPojo) {
+	public UserPojo getUserPassword(UserPojo userPojo) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void deleteUser(UserPojo userId) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public UserPojo getDeposit(UserPojo UserPojo) {
+	public UserPojo getDeposit(UserPojo userPojo) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public UserPojo getWithdraw(UserPojo UserPojo) {
+	public UserPojo getWithdraw(UserPojo userPojo) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public UserPojo getBlance(int userId) {
-		UserPojo  foundBlance = null;
-		for (int i = 0; i < viewBlance.size(); i++) {
-			if (viewBlance.get(i).getUserId() == userId) {
-				foundBlance = viewBlance.get(i); // when match found, assign the found reference variable to
-													// foundProduct
-				break;
-			}
-		}
-		return foundBlance;
-	}
-
-	@Override
-	public UserPojo getTansaction(UserPojo UserPojo) {
+	public UserPojo getBlance(UserPojo userPojo) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
-	
-	
-	
+
+	@Override
+	public UserPojo getTansaction(UserPojo userPojo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public UserPojo getMultipleAccount(UserPojo userPojo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public UserPojo getJointAccount(UserPojo userPojo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public UserPojo getTranferFund(UserPojo userPojo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
