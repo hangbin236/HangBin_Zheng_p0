@@ -16,7 +16,7 @@ public class UserDaoCollectionImpl implements UserDao {
 	}
 
 	@Override
-	public UserPojo getUserId(UserPojo userPojo) {
+	public UserPojo getUserId(UserPojo userId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
