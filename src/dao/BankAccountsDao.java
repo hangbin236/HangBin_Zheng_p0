@@ -4,7 +4,9 @@ import model.UserPojo;
 
 public interface BankAccountsDao{
 	
-	UserPojo getDeposit(UserPojo userPojo);
+	UserPojo addAccount(UserPojo userPojo);
+	
+	UserPojo getDeposit(UserPojo userPojo); 
 
 	UserPojo getWithdraw(UserPojo userPojo);
 

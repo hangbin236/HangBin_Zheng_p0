@@ -1,9 +1,11 @@
 CREATE DATABASE bas;
 
+DROP TABLE IF EXISTS users;
+
 CREATE TABLE users (
-	user_id serial PRIMARY KEY,
-	username VARCHAR ( 50 ) UNIQUE NOT NULL,
-	password VARCHAR ( 50 ) NOT NULL,
+	user_id int PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+	username VARCHAR ( 255 ) UNIQUE NOT NULL,
+	password TEXT NOT NULL,
 	created_on TIMESTAMP NOT NULL,
 	last_login TIMESTAMP);
 	

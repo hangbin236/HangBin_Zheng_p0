@@ -2,7 +2,13 @@ package dao;
 
 import model.UserPojo;
 
-public class BankAccountsDaoDatabaseImpl implements BankAccountsDao{
+public class BankAccountsDaoDatabaseImpl implements BankAccountsDao {
+
+	@Override
+	public UserPojo addAccount(UserPojo userPojo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	@Override
 	public UserPojo getDeposit(UserPojo userPojo) {

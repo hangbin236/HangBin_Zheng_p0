@@ -5,16 +5,18 @@ public class UserPojo {
 	private int userId;
 	private String username;
 	private String password;
+	private String addUsers;
 
 	public UserPojo() {
 
 	}
 
-	public UserPojo(int userId, String username, String password) {
+	public UserPojo(int userId, String username, String password, String addUsers) {
 		super();
 		this.userId = userId;
 		this.username = username;
 		this.password = password;
+		this.addUsers = addUsers;
 	}
 
 	public int getUserId() {
@@ -41,9 +43,18 @@ public class UserPojo {
 		this.password = password;
 	}
 
+	public String getAddUsers() {
+		return addUsers;
+	}
+
+	public void setAddUsers(String addUsers) {
+		this.addUsers = addUsers;
+	}
+
 	@Override
 	public String toString() {
-		return "UserPojo [userId=" + userId + ", username=" + username + ", password=" + password + "]";
+		return "UserPojo [userId=" + userId + ", username=" + username + ", password=" + password + ", addUsers="
+				+ addUsers + "]";
 	}
 
 }
