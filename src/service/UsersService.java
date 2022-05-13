@@ -1,12 +1,10 @@
-package dao;
+package service;
 
 import exception.SystemException;
 import model.UserPojo;
 
-public interface UserDao {
+public interface UsersService {
 
 	UserPojo addUsers(UserPojo userPojo) throws SystemException;
-
-	UserPojo getUsersInfo(UserPojo userPojo)throws SystemException; // read
 
 }
