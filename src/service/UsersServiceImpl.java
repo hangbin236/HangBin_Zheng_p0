@@ -15,17 +15,15 @@ public class UsersServiceImpl implements UsersService {
 		userDao = new UserDaoDatabaseImpl();
 	}
 
-
-
-	public UserPojo getUsersInfo(UserPojo userPojo) throws SystemException {
-		return userDao.getUsersInfo(userPojo);
-	}
-
-
-
 	@Override
 	public UserPojo addUsers(UserPojo userPojo) throws SystemException {
 		return userDao.addUsers(userPojo);
+	}
+
+	@Override
+	public UserPojo checkLoginInfo(UserPojo compareUserPojo) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

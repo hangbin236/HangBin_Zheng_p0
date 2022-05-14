@@ -12,9 +12,9 @@ public class BankingApplicationSystem {
 	public static void main(String[] args) {
 
 		Scanner scan = new Scanner(System.in);
-		
-		UsersService userService = new UsersServiceImpl ();
-		
+
+		UsersService userService = new UsersServiceImpl();
+
 		char proceed = 'y';
 
 		while (proceed == 'y') {
@@ -35,24 +35,36 @@ public class BankingApplicationSystem {
 				System.out.println("WELCOME TO BANKING APPLICATION SYSTEM");
 				System.out.println("*************************************");
 				System.out.println("Create a UserName:");
-				scan.next();
+				scan.nextLine();
 				newUserPojo.setUsername(scan.nextLine());
 				System.out.println("Create a Password:");
 				scan.next();
 				newUserPojo.setPassword(scan.nextLine());
-				
-				UserPojo userPojo = null;
+
+				UserPojo UserPojo = null;
 				try {
-					userPojo = userService.addUsers(newUserPojo);
+					UserPojo = userService.addUsers(newUserPojo);
 				} catch (SystemException e) {
 					System.out.println(e.getMessage());
 					break;
 				}
-				
-				System.out.println("Account create successful."+ userPojo.getUserId());
+
+				System.out.println("Account create successful. \nUser Id is : " + UserPojo.getUserId());
 				System.out.println("Select Option 2 to login to Banking Application System.");
 				break;
 			case 2:
+				UserPojo compareUserPojo = new UserPojo();
+				System.out.println("Enter your UserName:");
+				scan.nextLine();
+				compareUserPojo.setUsername(scan.nextLine());
+				System.out.println("Enter your Password:");
+				scan.next();
+				compareUserPojo.setPassword(scan.nextLine());
+				
+				
+
+				System.out.println("Account Sign in. \nUser Id is : " + compareUserPojo.getUserId());
+				
 				break;
 			case 3:
 				System.out.println("************************************************");

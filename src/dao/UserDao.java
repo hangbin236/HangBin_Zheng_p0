@@ -7,6 +7,6 @@ public interface UserDao {
 
 	UserPojo addUsers(UserPojo userPojo) throws SystemException;
 
-	UserPojo getUsersInfo(UserPojo userPojo)throws SystemException; // read
+	void checkLoginInfo(UserPojo userPojo, UserPojo passwordPojo) throws SystemException;// read
 
 }

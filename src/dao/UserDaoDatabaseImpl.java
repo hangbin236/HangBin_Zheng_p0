@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.mindrot.jbcrypt.BCrypt;
+import org.postgresql.shaded.com.ongres.scram.common.util.CryptoUtil;
+
 import exception.SystemException;
 import model.UserPojo;
 
@@ -26,15 +29,9 @@ public class UserDaoDatabaseImpl implements UserDao {
 			conn = DBUtil.makeConnection();
 			Statement stmt = conn.createStatement();
 
-			String query = "INSERT INTO users(username, password) VALUES ('" + userPojo.getUsername() + "' , crypt('"
-					+ userPojo.getPassword() + "', gen_salt('bf'))) returning username";
-
-			// String query = "INSERT INTO users(username, password) VALUES
-			// ("+userPojo.getUsername()+" , crypt("+userPojo.getPassword()+",
-			// gen_salt('bf')));";
-			// String query = "INSERT INTO users(username, password) VALUES ('" +
-			// userPojo.getUsername() + "', 'crypt('" + userPojo.getPassword() +
-			// "',gen_salt('bf'))');'";
+			String query = "INSERT INTO users(username, password,created_on,last_login) VALUES (' "
+					+ userPojo.getUsername() + " ' , crypt('" + userPojo.getPassword()
+					+ "', gen_salt('bf')),CURRENT_DATE,NOW()) returning user_id";
 
 			ResultSet resultSet = stmt.executeQuery(query);
 			resultSet.next();
@@ -48,9 +45,12 @@ public class UserDaoDatabaseImpl implements UserDao {
 
 	// checking existing credentials inside the database
 	@Override
-	public UserPojo getUsersInfo(UserPojo userPojo) throws SystemException {
-		// TODO Auto-generated method stub
-		return null;
+	public boolean checkLoginInfo(UserPojo userPojo, UserPojo passwordPojo) throws SystemException {
+		Connection conn;
+		
+	
+	return true;
 	}
+
 
 }
