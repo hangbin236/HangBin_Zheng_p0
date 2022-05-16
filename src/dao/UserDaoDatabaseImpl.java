@@ -29,8 +29,8 @@ public class UserDaoDatabaseImpl implements UserDao {
 			conn = DBUtil.makeConnection();
 			Statement stmt = conn.createStatement();
 
-			String query = "INSERT INTO users(username, password,created_on,last_login) VALUES (' "
-					+ userPojo.getUsername() + " ' , crypt('" + userPojo.getPassword()
+			String query = "INSERT INTO users(user_name, password,created_on,last_login) VALUES ('"
+					+ userPojo.getUsername() + "' , crypt('" + userPojo.getPassword()
 					+ "', gen_salt('bf')),CURRENT_DATE,NOW()) returning user_id";
 
 			ResultSet resultSet = stmt.executeQuery(query);
@@ -45,12 +45,26 @@ public class UserDaoDatabaseImpl implements UserDao {
 
 	// checking existing credentials inside the database
 	@Override
-	public boolean checkLoginInfo(UserPojo userPojo, UserPojo passwordPojo) throws SystemException {
-		Connection conn;
-		
-	
-	return true;
-	}
+	public UserPojo checkLoginInfo(UserPojo userPojo) throws SystemException {
+		Connection conn = null;
 
+		try {
+			conn = DBUtil.makeConnection();
+			Statement stmt = conn.createStatement();
+
+			String query = " SELECT user_name, PASSWORD FROM users WHERE user_name= '" + userPojo.getUsername()
+					+ "'AND password = crypt('" + userPojo.getPassword() + "', gen_salt('bf'))";
+
+			ResultSet resultSet = stmt.executeQuery(query);
+			if (resultSet.next()) {
+				userPojo.setUsername(resultSet.getString(2));
+				userPojo.setPassword(resultSet.getString(3));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new SystemException();
+		}
+		return userPojo;
+	}
 
 }

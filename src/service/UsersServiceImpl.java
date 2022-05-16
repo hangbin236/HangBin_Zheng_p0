@@ -21,9 +21,9 @@ public class UsersServiceImpl implements UsersService {
 	}
 
 	@Override
-	public UserPojo checkLoginInfo(UserPojo compareUserPojo) {
-		// TODO Auto-generated method stub
-		return null;
+	public UserPojo checkLoginInfo(UserPojo userPojo) throws SystemException {
+		
+		return userDao.checkLoginInfo(userPojo);
 	}
 
 }

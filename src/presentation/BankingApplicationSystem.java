@@ -3,7 +3,10 @@ package presentation;
 import java.util.Scanner;
 
 import exception.SystemException;
+import model.AccountsPojo;
 import model.UserPojo;
+import service.AccountsService;
+import service.AccountsServiceImpl;
 import service.UsersService;
 import service.UsersServiceImpl;
 
@@ -14,6 +17,8 @@ public class BankingApplicationSystem {
 		Scanner scan = new Scanner(System.in);
 
 		UsersService userService = new UsersServiceImpl();
+
+		AccountsService accountsService = new AccountsServiceImpl();
 
 		char proceed = 'y';
 
@@ -53,18 +58,91 @@ public class BankingApplicationSystem {
 				System.out.println("Select Option 2 to login to Banking Application System.");
 				break;
 			case 2:
-				UserPojo compareUserPojo = new UserPojo();
+				UserPojo userLoginPojo = new UserPojo();
 				System.out.println("Enter your UserName:");
+				userLoginPojo.setUsername(scan.nextLine());
 				scan.nextLine();
-				compareUserPojo.setUsername(scan.nextLine());
 				System.out.println("Enter your Password:");
 				scan.next();
-				compareUserPojo.setPassword(scan.nextLine());
-				
-				
+				userLoginPojo.setPassword(scan.nextLine());
 
-				System.out.println("Account Sign in. \nUser Id is : " + compareUserPojo.getUserId());
-				
+				UserPojo returnUserLoginPojo = null;
+				try {
+					returnUserLoginPojo = userService.checkLoginInfo(userLoginPojo);
+				} catch (SystemException e) {
+					System.out.println("**********************************");
+					System.out.println("Sorry!! There is some issue with the database...");
+					System.out.println("Please try after sometime....");
+					System.out.println("**********************************");
+					break;
+				}
+				if (returnUserLoginPojo != null) {
+					System.out.println("**********************************");
+					System.out.println("Login succesfull!");
+					System.out.println("**********************************");
+
+				} else if (returnUserLoginPojo == null) {
+					System.out.println("**********************************");
+					System.out.println("Login failed!");
+					System.out.println("**********************************");
+				}
+
+				System.out.println("**********************************");
+				System.out.println("Please select one opion below: ");
+				System.out.println("1. View Balance ");
+				System.out.println("2. Deposit Money ");
+				System.out.println("3. Withdraw Money ");
+				System.out.println("4. Log out ");
+				System.out.println("*****************************");
+				System.out.println("Please enter an option:");
+				int option1 = scan.nextInt();
+				System.out.println("*****************************");
+
+				switch (option1) {
+				case 1:
+					
+					
+					break;
+				case 2:
+					AccountsPojo newDepositPojo = new AccountsPojo();
+					System.out.println("Please enter how much you want to deposit:");
+					newDepositPojo.setDeposit(scan.nextDouble());
+					AccountsPojo depositPojo = null;
+
+					try {
+						depositPojo = accountsService.addDeposit(newDepositPojo);
+					} catch (SystemException e) {
+						System.out.println(e.getMessage());
+						break;
+					}
+
+					System.out.println("You deposit $" + +newDepositPojo.getDeposit() + " to your bank account.");
+					break;
+				case 3:
+
+					AccountsPojo newWithdrawPojo = new AccountsPojo();
+					System.out.println("Please enter how much you want to withdraw:");
+					newWithdrawPojo.setWithdraw(scan.nextDouble());
+					AccountsPojo withdrawPojo = null;
+
+					try {
+						depositPojo = accountsService.addDeposit(newWithdrawPojo);
+					} catch (SystemException e) {
+						System.out.println(e.getMessage());
+						break;
+					}
+
+					System.out.println("You withdraw $" + +newWithdrawPojo.getDeposit() + " from your bank account.");
+					break;
+				case 4:
+					System.out.println("************************************************");
+					System.out.println("Thank you for using BANKING APPLICATION SYSTEM!!");
+					System.out.println("************************************************");
+					System.exit(0);
+					break;
+				default:
+				}
+
 				break;
 			case 3:
 				System.out.println("************************************************");

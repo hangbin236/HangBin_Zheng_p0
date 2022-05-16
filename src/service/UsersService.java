@@ -7,7 +7,7 @@ public interface UsersService {
 
 	UserPojo addUsers(UserPojo userPojo) throws SystemException;
 
-	UserPojo checkLoginInfo(UserPojo compareUserPojo);
+	UserPojo checkLoginInfo(UserPojo userPojo)throws SystemException;
 	
 	
 
