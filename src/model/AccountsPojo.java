@@ -3,7 +3,7 @@ package model;
 public class AccountsPojo {
 	
 	private int accountId;
-	private char accountType;
+	private String accountType;
 	private double balance;
 	private double deposit;
 	private double withdraw;
@@ -15,7 +15,7 @@ public class AccountsPojo {
 	public AccountsPojo() {
 	}
 
-	public AccountsPojo(int accountId, char accountType, double balance, double deposit, double withdraw,
+	public AccountsPojo(int accountId, String accountType, double balance, double deposit, double withdraw,
 			String multipleAccount, String jointAccount, double tranferFund) {
 		super();
 		this.accountId = accountId;
@@ -36,11 +36,11 @@ public class AccountsPojo {
 		this.accountId = accountId;
 	}
 
-	public char getAccountType() {
+	public String getAccountType() {
 		return accountType;
 	}
 
-	public void setAccountType(char accountType) {
+	public void setAccountType(String accountType) {
 		this.accountType = accountType;
 	}
 
