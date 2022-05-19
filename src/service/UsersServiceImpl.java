@@ -15,14 +15,28 @@ public class UsersServiceImpl implements UsersService {
 	}
 
 	@Override
-	public UserPojo addUsers(UserPojo userPojo, AccountsPojo accountPojo) throws SystemException {
-		return userDao.addUsers(userPojo, accountPojo);
+	public UserPojo addUsers(UserPojo userPojo) throws SystemException {
+		return userDao.addUsers(userPojo);
 	}
 
 	@Override
-	public UserPojo checkLoginInfo(UserPojo userPojo, String password) throws SystemException {
+	public UserPojo getUsers(int userId) throws SystemException {
+		return userDao.getUsers(userId);
+	}
 
-		return userDao.checkLoginInfo(userPojo, password);
+	@Override
+	public UserPojo validateUser(String username, String password) throws SystemException {
+		return userDao.validateUser(username, password);
+	}
+
+	@Override
+	public UserPojo updateUsers(UserPojo userPojo) throws SystemException {
+		return userDao.updateUsers(userPojo);
+	}
+
+	@Override
+	public void deleteUsers(int userId) throws SystemException {
+
 	}
 
 }

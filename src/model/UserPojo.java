@@ -8,7 +8,20 @@ public class UserPojo {
 	private String addUsers;
 
 	public UserPojo() {
+		super();
+	}
 
+	public UserPojo(String username, String password) {
+		super();
+		this.username = username;
+		this.password = password;
+	}
+
+	public UserPojo(int userID, String username, String password) {
+		super();
+		this.userId = userID;
+		this.username = username;
+		this.password = password;
 	}
 
 	public UserPojo(int userId, String username, String password, String addUsers) {

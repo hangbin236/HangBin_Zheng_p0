@@ -1,28 +1,34 @@
 package model;
 
 public class AccountsPojo {
-	
+
 	private int accountId;
 	private String accountType;
 	private double balance;
-	private double deposit;
-	private double withdraw;
 	private String multipleAccount;
 	private String jointAccount;
 	private double tranferFund;
-	
-	//update stuff 
+
+	// update stuff
 	public AccountsPojo() {
+		super();
 	}
 
-	public AccountsPojo(int accountId, String accountType, double balance, double deposit, double withdraw,
-			String multipleAccount, String jointAccount, double tranferFund) {
+	public AccountsPojo(int accountId, String accountType, double balance) {
 		super();
 		this.accountId = accountId;
 		this.accountType = accountType;
 		this.balance = balance;
-		this.deposit = deposit;
-		this.withdraw = withdraw;
+
+	}
+
+	public AccountsPojo(int accountId, String accountType, double balance, String multipleAccount, String jointAccount,
+			double tranferFund) {
+		super();
+		this.accountId = accountId;
+		this.accountType = accountType;
+		this.balance = balance;
+
 		this.multipleAccount = multipleAccount;
 		this.jointAccount = jointAccount;
 		this.tranferFund = tranferFund;
@@ -52,22 +58,6 @@ public class AccountsPojo {
 		this.balance = balance;
 	}
 
-	public double getDeposit() {
-		return deposit;
-	}
-
-	public void setDeposit(double deposit) {
-		this.deposit = deposit;
-	}
-
-	public double getWithdraw() {
-		return withdraw;
-	}
-
-	public void setWithdraw(double withdraw) {
-		this.withdraw = withdraw;
-	}
-
 	public String getMultipleAccount() {
 		return multipleAccount;
 	}
@@ -95,11 +85,8 @@ public class AccountsPojo {
 	@Override
 	public String toString() {
 		return "BankAccountsPojo [accountId=" + accountId + ", accountType=" + accountType + ", balance=" + balance
-				+ ", deposit=" + deposit + ", withdraw=" + withdraw + ", multipleAccount=" + multipleAccount
-				+ ", jointAccount=" + jointAccount + ", tranferFund=" + tranferFund + "]";
+				+ " , multipleAccount=" + multipleAccount + ", jointAccount=" + jointAccount + ", tranferFund="
+				+ tranferFund + "]";
 	}
 
-	
-
-	
 }

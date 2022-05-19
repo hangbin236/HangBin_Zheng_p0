@@ -71,4 +71,34 @@ public class UserDaoDatabaseImpl implements UserDao {
 		return userPojo;
 	}
 
+	@Override
+	public UserPojo addUsers(UserPojo userPojo) throws SystemException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public UserPojo getUsers(int userId) throws SystemException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public UserPojo validateUser(String username, String password) throws SystemException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public UserPojo updateUsers(UserPojo userPojo) throws SystemException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<UserPojo> getJointAccountUsers(int accountId) throws SystemException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

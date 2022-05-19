@@ -1,5 +1,7 @@
 package service;
 
+import java.util.List;
+
 import dao.AccountsDao;
 import dao.AccountsDaoDatabaseImpl;
 import exception.SystemException;
@@ -15,23 +17,23 @@ public class AccountsServiceImpl implements AccountsService {
 	}
 
 	@Override
-	public AccountsPojo addDeposit(AccountsPojo AccountPojo) throws SystemException {
-		return accountsDao.getDeposit(AccountPojo);
+	public AccountsPojo getBankAccountId(int accountId) throws SystemException {
+		return null;
 	}
 
 	@Override
-	public AccountsPojo addAccount(AccountsPojo accountsPojo, UserPojo userpojo) throws SystemException {
-		return accountsDao.addAccount(accountsPojo, userpojo);
+	public AccountsPojo updateBalance(AccountsPojo account, double amount) throws SystemException {
+		return accountsDao.updateBalance(account, amount);
 	}
 
 	@Override
-	public AccountsPojo getAccountType(AccountsPojo accountsPojo) throws SystemException {
-		return accountsDao.getAccountType(accountsPojo);
+	public AccountsPojo addAccount(int userId, String accountType) throws SystemException {
+		return accountsDao.addAccount(userId, accountType);
 	}
 
 	@Override
-	public AccountsPojo viewBalance(AccountsPojo accountsPojo) throws SystemException {
-		return accountsDao.getBlance(accountsPojo);
+	public List<AccountsPojo> getUserBankAccount(int userId) throws SystemException {
+		return accountsDao.getUserBankAccount(userId);
 	}
 
 }

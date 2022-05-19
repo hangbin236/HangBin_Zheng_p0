@@ -18,7 +18,7 @@ public class DBUtil {
 			}
 		}
 		
-		
+		/*
 		// connected to AWS Database
 		static Connection makeConnection() throws SQLException {
 			//step 2
@@ -30,9 +30,9 @@ public class DBUtil {
 			}
 			return conn;
 		}
-	
+		*/
 		
-		/*  // connected to local database
+		  // connected to local database
 		static Connection makeConnection() throws SQLException {
 			//step 2
 			String connectionUrl = "jdbc:postgresql://localhost:5432/bas";
@@ -43,5 +43,5 @@ public class DBUtil {
 			}
 			return conn;
 		}
-		*/
+		
 }
