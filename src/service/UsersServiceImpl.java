@@ -25,7 +25,7 @@ public class UsersServiceImpl implements UsersService {
 	}
 
 	@Override
-	public UserPojo validateUser(String username, String password) throws SystemException {
+	public int validateUser(String username, String password) throws SystemException {
 		return userDao.validateUser(username, password);
 	}
 
@@ -39,4 +39,10 @@ public class UsersServiceImpl implements UsersService {
 
 	}
 
+	@Override
+	public UserPojo checkLoginInfo(UserPojo userPojo, String password) throws SystemException {
+		return userDao.checkLoginInfo(userPojo, password);
+	}
+
+	
 }

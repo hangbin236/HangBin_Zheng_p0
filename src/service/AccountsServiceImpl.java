@@ -27,13 +27,19 @@ public class AccountsServiceImpl implements AccountsService {
 	}
 
 	@Override
-	public AccountsPojo addAccount(int userId, String accountType) throws SystemException {
-		return accountsDao.addAccount(userId, accountType);
+	public AccountsPojo addAccount(String accountType, int userId) throws SystemException {
+		return accountsDao.addAccount(accountType, userId);
 	}
 
 	@Override
 	public List<AccountsPojo> getUserBankAccount(int userId) throws SystemException {
 		return accountsDao.getUserBankAccount(userId);
+	}
+
+	@Override
+	public AccountsPojo updateBalance(int account, double amount) throws SystemException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

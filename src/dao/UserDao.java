@@ -12,10 +12,12 @@ public interface UserDao {
 
 	UserPojo getUsers(int userId) throws SystemException;
 
-	UserPojo validateUser(String username, String password) throws SystemException;
+	int validateUser(String username, String password) throws SystemException;
 
 	UserPojo updateUsers(UserPojo userPojo) throws SystemException;
 	
 	List<UserPojo> getJointAccountUsers (int accountId) throws SystemException;
+
+	UserPojo checkLoginInfo(UserPojo userPojo, String password) throws SystemException;
 
 }

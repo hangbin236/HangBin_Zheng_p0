@@ -1,5 +1,6 @@
 package presentation;
 
+import java.util.List;
 import java.util.Scanner;
 
 import exception.SystemException;
@@ -12,13 +13,15 @@ import service.UsersServiceImpl;
 
 public class BankingApplicationSystem {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws SystemException {
 
 		Scanner scan = new Scanner(System.in);
 
 		UsersService userService = new UsersServiceImpl();
 
 		AccountsService accountsService = new AccountsServiceImpl();
+		
+		List<AccountsPojo> newUserBankAccount = null;
 
 		char proceed = 'y';
 
@@ -36,6 +39,7 @@ public class BankingApplicationSystem {
 
 			switch (option) {
 			case 1:
+				int accountType =0;
 				UserPojo newUserPojo = new UserPojo();
 				AccountsPojo newAccountPojo = new AccountsPojo();
 				System.out.println("WELCOME TO BANKING APPLICATION SYSTEM");
@@ -48,18 +52,18 @@ public class BankingApplicationSystem {
 				newUserPojo.setPassword(scan.next());
 				System.out.println("Enter Checking or Saving account:");
 				scan.nextLine();
-				newAccountPojo.setAccountType(scan.next());
-
+				String userType =scan.next();
+				
 				UserPojo UserPojo = null;
 				AccountsPojo accountPojo = null;
 				try {
-					UserPojo = userService.addUsers(newUserPojo, newAccountPojo);
-					accountPojo = accountsService.addAccount(newAccountPojo, newUserPojo);
+					UserPojo = userService.addUsers(newUserPojo);
+					accountPojo = accountsService.addAccount(userType,newUserPojo.getUserId());
 				} catch (SystemException e) {
 					System.out.println(e.getMessage());
 					break;
 				}
-
+				
 				System.out.println("User create successful. \nUser Id is : " + UserPojo.getUserId());
 				System.out.println("Account create successful. \nAccount Id is : " + accountPojo.getAccountId());
 				System.out.println("Select Option 2 to login to Banking Application System.");
@@ -106,6 +110,8 @@ public class BankingApplicationSystem {
 
 						switch (option1) {
 						case 1:
+							
+							/*
 							AccountsPojo newViewBalancePojo = new AccountsPojo();
 							AccountsPojo ViewBalancePojo = null;
 							try {
@@ -115,29 +121,28 @@ public class BankingApplicationSystem {
 								System.out.println(e.getMessage());
 								break;
 							}
-
+							*/
 							break;
 						case 2:
-							AccountsPojo newDepositPojo = new AccountsPojo();
-							System.out.println("");
-							newDepositPojo.setAccountId(1);
+							AccountsPojo newBalance = new AccountsPojo();
+							
 							System.out.println("Please enter how much you want to deposit:");
-							newDepositPojo.setDeposit(scan.nextDouble());
+							double deposit=scan.nextDouble();
 							AccountsPojo depositPojo = null;
 
 							try {
-								depositPojo = accountsService.addDeposit(newDepositPojo);
-
+								
+								depositPojo = accountsService.updateBalance(newBalance, deposit);
 							} catch (SystemException e) {
 								System.out.println(e.getMessage());
 								break;
 							}
 
 							System.out
-									.println("You deposit $" + newDepositPojo.getDeposit() + " to your bank account.");
+									.println("You deposit $" + newBalance.getBalance() + " to your bank account.");
 							break;
 						case 3:
-
+							/*
 							AccountsPojo newWithdrawPojo = new AccountsPojo();
 							System.out.println("Please enter how much you want to withdraw:");
 							newWithdrawPojo.setWithdraw(scan.nextDouble());
@@ -152,6 +157,7 @@ public class BankingApplicationSystem {
 
 							System.out.println(
 									"You withdraw $" + newWithdrawPojo.getWithdraw() + " from your bank account.");
+									*/
 							break;
 						case 4:
 							System.out.println("************************************************");

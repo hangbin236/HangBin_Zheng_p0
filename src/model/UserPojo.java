@@ -17,9 +17,9 @@ public class UserPojo {
 		this.password = password;
 	}
 
-	public UserPojo(int userID, String username, String password) {
+	public UserPojo(int userId, String username, String password) {
 		super();
-		this.userId = userID;
+		this.userId = userId;
 		this.username = username;
 		this.password = password;
 	}
@@ -30,6 +30,11 @@ public class UserPojo {
 		this.username = username;
 		this.password = password;
 		this.addUsers = addUsers;
+	}
+
+	public UserPojo(int userId, String username) {
+		this.userId = userId;
+		this.username = username;
 	}
 
 	public int getUserId() {

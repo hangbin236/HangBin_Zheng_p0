@@ -8,7 +8,7 @@ import model.UserPojo;
 
 public interface AccountsDao {
 
-	AccountsPojo addAccount(int userId, String accountType) throws SystemException;
+	AccountsPojo addAccount(String accountType, int userId) throws SystemException;
 
 	AccountsPojo updateBalance(AccountsPojo account, double amount) throws SystemException;
 

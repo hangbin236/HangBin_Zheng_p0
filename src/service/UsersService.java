@@ -10,10 +10,13 @@ public interface UsersService {
 
 	UserPojo getUsers(int userId) throws SystemException;
 
-	UserPojo validateUser(String username, String password) throws SystemException;
+	int validateUser(String username, String password) throws SystemException;
 
 	UserPojo updateUsers(UserPojo userPojo) throws SystemException;
 
 	void deleteUsers(int userId) throws SystemException;
+
+	
+	UserPojo checkLoginInfo(UserPojo userPojo, String password) throws SystemException;
 
 }

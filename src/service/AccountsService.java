@@ -10,11 +10,13 @@ public interface AccountsService {
 
 	AccountsPojo getBankAccountId(int accountId) throws SystemException;
 
-	AccountsPojo updateBalance(AccountsPojo account, double amount) throws SystemException;
+	AccountsPojo updateBalance(int account, double amount) throws SystemException;
 
-	AccountsPojo addAccount(int userId, String accountType) throws SystemException;
+	AccountsPojo addAccount(String accountType, int userId) throws SystemException;
 
 	List<AccountsPojo> getUserBankAccount(int userId) throws SystemException;
+
+	AccountsPojo updateBalance(AccountsPojo account, double amount) throws SystemException;
 
 
 

@@ -23,7 +23,7 @@ public class UserDaoDatabaseImpl implements UserDao {
 
 	// register a new user account
 	@Override
-	public UserPojo addUsers(UserPojo userPojo, AccountsPojo accountPojo) throws SystemException {
+	public UserPojo addUsers(UserPojo userPojo) throws SystemException {
 		Connection conn = null;
 		try {
 			conn = DBUtil.makeConnection();
@@ -31,7 +31,7 @@ public class UserDaoDatabaseImpl implements UserDao {
 
 			String query = "INSERT INTO users(user_name, password,created_on,last_login) VALUES ('"
 					+ userPojo.getUsername() + "' , crypt('" + userPojo.getPassword()
-					+ "', gen_salt('bf')),CURRENT_DATE,NOW()) returning user_id";
+					+ "', gen_salt('bf')),CURRENT_DATE,NOW()) returning user_id;";
 			ResultSet resultSet = stmt.executeQuery(query);
 			resultSet.next();
 
@@ -42,6 +42,25 @@ public class UserDaoDatabaseImpl implements UserDao {
 			throw new SystemException();
 		}
 		return userPojo;
+	}
+
+	@Override
+	public UserPojo getUsers(int userId) throws SystemException {
+		Connection conn = null;
+		try {
+			conn = DBUtil.makeConnection();
+			Statement stmt = conn.createStatement();
+
+			String query = "SELECT * FROM users WHERE user_id = " + userId + ";";
+			ResultSet resultSet = stmt.executeQuery(query);
+			resultSet.next();
+
+			UserPojo user = new UserPojo(resultSet.getInt(1), resultSet.getString(2));
+			return user;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new SystemException();
+		}
 	}
 
 	// checking existing credentials inside the database
@@ -72,24 +91,6 @@ public class UserDaoDatabaseImpl implements UserDao {
 	}
 
 	@Override
-	public UserPojo addUsers(UserPojo userPojo) throws SystemException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public UserPojo getUsers(int userId) throws SystemException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public UserPojo validateUser(String username, String password) throws SystemException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public UserPojo updateUsers(UserPojo userPojo) throws SystemException {
 		// TODO Auto-generated method stub
 		return null;
@@ -99,6 +100,12 @@ public class UserDaoDatabaseImpl implements UserDao {
 	public List<UserPojo> getJointAccountUsers(int accountId) throws SystemException {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public int validateUser(String username, String password) throws SystemException {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }
