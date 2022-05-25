@@ -1,6 +1,5 @@
 package presentation;
 
-import java.util.List;
 import java.util.Scanner;
 
 import exception.SystemException;
@@ -20,8 +19,9 @@ public class BankingApplicationSystem {
 		UsersService userService = new UsersServiceImpl();
 
 		AccountsService accountsService = new AccountsServiceImpl();
-		
-		List<AccountsPojo> newUserBankAccount = null;
+
+		UserPojo user = null;
+		AccountsPojo accountInfo = null;
 
 		char proceed = 'y';
 
@@ -39,9 +39,7 @@ public class BankingApplicationSystem {
 
 			switch (option) {
 			case 1:
-				int accountType =0;
 				UserPojo newUserPojo = new UserPojo();
-				AccountsPojo newAccountPojo = new AccountsPojo();
 				System.out.println("WELCOME TO BANKING APPLICATION SYSTEM");
 				System.out.println("*************************************");
 				System.out.println("Create a UserName:");
@@ -52,23 +50,22 @@ public class BankingApplicationSystem {
 				newUserPojo.setPassword(scan.next());
 				System.out.println("Enter Checking or Saving account:");
 				scan.nextLine();
-				String userType =scan.next();
-				
-				UserPojo UserPojo = null;
-				AccountsPojo accountPojo = null;
+				String userType = scan.next();
+
 				try {
-					UserPojo = userService.addUsers(newUserPojo);
-					accountPojo = accountsService.addAccount(userType,newUserPojo.getUserId());
+					user = userService.addUsers(newUserPojo);
+					accountInfo = accountsService.addAccount(userType, newUserPojo.getUserId());
 				} catch (SystemException e) {
 					System.out.println(e.getMessage());
 					break;
 				}
-				
-				System.out.println("User create successful. \nUser Id is : " + UserPojo.getUserId());
-				System.out.println("Account create successful. \nAccount Id is : " + accountPojo.getAccountId());
+
+				System.out.println("User create successful. \nUser Id is : " + user.getUserId());
+				System.out.println("Account create successful. \nAccount Id is : " + accountInfo.getAccountId());
 				System.out.println("Select Option 2 to login to Banking Application System.");
 				break;
 			case 2:
+
 				UserPojo userLoginPojo = new UserPojo();
 				System.out.println("Enter your UserName:");
 				userLoginPojo.setUsername(scan.next());
@@ -77,9 +74,9 @@ public class BankingApplicationSystem {
 				userLoginPojo.setPassword(scan.next());
 				scan.nextLine();
 
-				UserPojo returnUserLoginPojo = null;
 				try {
-					returnUserLoginPojo = userService.checkLoginInfo(userLoginPojo, userLoginPojo.getPassword());
+					user = userService.checkLoginInfo(userLoginPojo, userLoginPojo.getPassword());
+					accountInfo = accountsService.getAccountInfo(user);
 
 				} catch (SystemException e) {
 					System.out.println("**********************************");
@@ -88,14 +85,14 @@ public class BankingApplicationSystem {
 					System.out.println("**********************************");
 					break;
 				}
-				if (returnUserLoginPojo == null) {
+				if (user == null) {
 					System.out.println("**********************************");
 					System.out.println("Login failed!");
 					System.out.println("**********************************");
 					break;
-				} else if (returnUserLoginPojo != null) {
+				} else if (user != null) {
 					char proceed1 = 'y';
-					while (proceed == 'y') {
+					while (proceed1 == 'y') {
 						System.out.println("**********************************");
 						System.out.println("**********************************");
 						System.out.println("Please select one opion below: ");
@@ -110,54 +107,45 @@ public class BankingApplicationSystem {
 
 						switch (option1) {
 						case 1:
-							
-							/*
-							AccountsPojo newViewBalancePojo = new AccountsPojo();
-							AccountsPojo ViewBalancePojo = null;
+
+							System.out.println("Your account balance is: $" + accountInfo.getBalance());
+
+							break;
+						case 2:
+
+							System.out.println("Please enter how much you want to deposit to your bank account:");
+							double deposit = scan.nextDouble();
+
 							try {
-								accountsService.viewBalance(newViewBalancePojo);
-								System.out.println("Your balance is: " + newViewBalancePojo.getBalance());
+								accountInfo = accountsService.updateBalance(accountInfo, deposit);
 							} catch (SystemException e) {
 								System.out.println(e.getMessage());
 								break;
 							}
-							*/
-							break;
-						case 2:
-							AccountsPojo newBalance = new AccountsPojo();
-							
-							System.out.println("Please enter how much you want to deposit:");
-							double deposit=scan.nextDouble();
-							AccountsPojo depositPojo = null;
 
+							System.out.println("You deposit $" + accountInfo.getBalance() + " to your bank account.");
+							System.out.println("Your new balance is $" + accountInfo.getBalance());
+							break;
+						case 3:
+							System.out.println("Please enter how much you want to withdraw from bank account:");
+							double withdraw = scan.nextDouble();
+							if (accountInfo.getBalance() <= 0) {
+								System.out.println("Cannot withraw a negative amount");
+								break;
+							} else if (withdraw > accountInfo.getBalance()) {
+								System.out.println("Cannot withraw an amount more than in account");
+								break;
+							}
 							try {
-								
-								depositPojo = accountsService.updateBalance(newBalance, deposit);
+								accountInfo = accountsService.updateBalance(accountInfo, -withdraw);
 							} catch (SystemException e) {
 								System.out.println(e.getMessage());
 								break;
 							}
 
 							System.out
-									.println("You deposit $" + newBalance.getBalance() + " to your bank account.");
-							break;
-						case 3:
-							/*
-							AccountsPojo newWithdrawPojo = new AccountsPojo();
-							System.out.println("Please enter how much you want to withdraw:");
-							newWithdrawPojo.setWithdraw(scan.nextDouble());
-							AccountsPojo withdrawPojo = null;
-
-							try {
-								depositPojo = accountsService.addDeposit(newWithdrawPojo);
-							} catch (SystemException e) {
-								System.out.println(e.getMessage());
-								break;
-							}
-
-							System.out.println(
-									"You withdraw $" + newWithdrawPojo.getWithdraw() + " from your bank account.");
-									*/
+									.println("You withdraw $" + accountInfo.getBalance() + " from your bank account.");
+							System.out.println("Your new balance is $" + accountInfo.getBalance());
 							break;
 						case 4:
 							System.out.println("************************************************");

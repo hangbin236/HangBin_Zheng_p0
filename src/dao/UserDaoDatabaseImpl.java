@@ -4,18 +4,17 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
 import org.mindrot.jbcrypt.BCrypt;
 import org.postgresql.shaded.com.ongres.scram.common.util.CryptoUtil;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import exception.SystemException;
-import model.AccountsPojo;
 import model.UserPojo;
 
 public class UserDaoDatabaseImpl implements UserDao {
+	private static final Logger LOG = LogManager.getLogger(UserDaoDatabaseImpl.class);
 
 	public UserDaoDatabaseImpl() {
 		super();
@@ -24,6 +23,7 @@ public class UserDaoDatabaseImpl implements UserDao {
 	// register a new user account
 	@Override
 	public UserPojo addUsers(UserPojo userPojo) throws SystemException {
+		LOG.info("Entered addUsers() in USERSDAO...");
 		Connection conn = null;
 		try {
 			conn = DBUtil.makeConnection();
@@ -41,6 +41,7 @@ public class UserDaoDatabaseImpl implements UserDao {
 			e.printStackTrace();
 			throw new SystemException();
 		}
+		LOG.info("Exit addUsers() in USERSDAO...");
 		return userPojo;
 	}
 
@@ -72,11 +73,13 @@ public class UserDaoDatabaseImpl implements UserDao {
 			conn = DBUtil.makeConnection();
 			Statement stmt = conn.createStatement();
 
-			String query = " SELECT user_name, PASSWORD FROM users WHERE user_name= '" + userPojo.getUsername()
+			String query = " SELECT user_id ,user_name, PASSWORD FROM users WHERE user_name= '" + userPojo.getUsername()
 					+ "' AND password = crypt('" + password + "',password)";
 			ResultSet resultSet = stmt.executeQuery(query);
 
 			if (resultSet.isBeforeFirst()) {
+				resultSet.next();
+				userPojo.setUserId(resultSet.getInt(1));
 				System.out.println("Login succesfull!");
 			} else {
 				System.out.println("Wrong Password.");
@@ -88,24 +91,6 @@ public class UserDaoDatabaseImpl implements UserDao {
 			throw new SystemException();
 		}
 		return userPojo;
-	}
-
-	@Override
-	public UserPojo updateUsers(UserPojo userPojo) throws SystemException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<UserPojo> getJointAccountUsers(int accountId) throws SystemException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public int validateUser(String username, String password) throws SystemException {
-		// TODO Auto-generated method stub
-		return 0;
 	}
 
 }

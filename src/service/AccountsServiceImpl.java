@@ -1,7 +1,5 @@
 package service;
 
-import java.util.List;
-
 import dao.AccountsDao;
 import dao.AccountsDaoDatabaseImpl;
 import exception.SystemException;
@@ -31,15 +29,10 @@ public class AccountsServiceImpl implements AccountsService {
 		return accountsDao.addAccount(accountType, userId);
 	}
 
-	@Override
-	public List<AccountsPojo> getUserBankAccount(int userId) throws SystemException {
-		return accountsDao.getUserBankAccount(userId);
-	}
 
 	@Override
-	public AccountsPojo updateBalance(int account, double amount) throws SystemException {
-		// TODO Auto-generated method stub
-		return null;
+	public AccountsPojo getAccountInfo(UserPojo user) throws SystemException {
+		return accountsDao.getAccountInfo(user);
 	}
 
 }
