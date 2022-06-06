@@ -16,7 +16,7 @@ public class AccountsDaoDatabaseImpl implements AccountsDao {
 
 	@Override
 	public AccountsPojo addAccount(String accountType, int userId) throws SystemException {
-		LOG.info("Entered addAccount() in ACCOUNTDAO...");
+		LOG.info("Entered addAccount() in AccountsDaoDatabaseImpl...");
 		Connection conn = null;
 
 		try {
@@ -38,7 +38,7 @@ public class AccountsDaoDatabaseImpl implements AccountsDao {
 			addNewAccount.setAccountType(accountType);
 			addNewAccount.setBalance(0);
 
-			LOG.info("Exited at addAccount() in ACCOUNTDAO...");
+			LOG.info("Exited at addAccount() in AccountsDaoDatabaseImpl...");
 			return addNewAccount;
 
 		} catch (SQLException e) {
@@ -50,7 +50,7 @@ public class AccountsDaoDatabaseImpl implements AccountsDao {
 
 	@Override
 	public AccountsPojo updateBalance(AccountsPojo account, double amount) throws SystemException {
-
+		LOG.info("Entered updateBalance() in AccountsDaoDatabaseImpl...");
 		Connection conn = null;
 		try {
 			conn = DBUtil.makeConnection();
@@ -66,11 +66,13 @@ public class AccountsDaoDatabaseImpl implements AccountsDao {
 			e.printStackTrace();
 			throw new SystemException();
 		}
+		LOG.info("Exited updateBalance() in AccountsDaoDatabaseImpl...");
 		return account;
 	}
 
 	@Override
 	public AccountsPojo getAccountInfo(UserPojo userId) throws SystemException {
+		LOG.info("Entered getAccountInfo() in AccountsDaoDatabaseImpl...");
 		Connection conn = null;
 		AccountsPojo newAccountInfo = new AccountsPojo();
 		try {
@@ -85,12 +87,14 @@ public class AccountsDaoDatabaseImpl implements AccountsDao {
 				newAccountInfo.setAccountId(rs1.getInt(1));
 				newAccountInfo.setAccountType(rs1.getString(2));
 				newAccountInfo.setBalance(rs1.getDouble(3));
+				LOG.info("Exited getAccountInfo() in AccountsDaoDatabaseImpl...");
 				return newAccountInfo;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new SystemException();
 		}
+		LOG.info("Exited getAccountInfo() in AccountsDaoDatabaseImpl...");
 		return newAccountInfo;
 	}
 

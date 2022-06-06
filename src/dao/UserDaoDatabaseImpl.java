@@ -23,7 +23,7 @@ public class UserDaoDatabaseImpl implements UserDao {
 	// register a new user account
 	@Override
 	public UserPojo addUsers(UserPojo userPojo) throws SystemException {
-		LOG.info("Entered addUsers() in USERSDAO...");
+		LOG.info("Entered addUsers() in UserDaoDatabaseImpl...");
 		Connection conn = null;
 		try {
 			conn = DBUtil.makeConnection();
@@ -41,12 +41,13 @@ public class UserDaoDatabaseImpl implements UserDao {
 			e.printStackTrace();
 			throw new SystemException();
 		}
-		LOG.info("Exit addUsers() in USERSDAO...");
+		LOG.info("Exited addUsers() in UserDaoDatabaseImpl...");
 		return userPojo;
 	}
 
 	@Override
 	public UserPojo getUsers(int userId) throws SystemException {
+		LOG.info("Entered getUsers() in UserDaoDatabaseImpl...");
 		Connection conn = null;
 		try {
 			conn = DBUtil.makeConnection();
@@ -57,6 +58,7 @@ public class UserDaoDatabaseImpl implements UserDao {
 			resultSet.next();
 
 			UserPojo user = new UserPojo(resultSet.getInt(1), resultSet.getString(2));
+			LOG.info("Exited getUsers() in UserDaoDatabaseImpl...");
 			return user;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -67,6 +69,7 @@ public class UserDaoDatabaseImpl implements UserDao {
 	// checking existing credentials inside the database
 	@Override
 	public UserPojo checkLoginInfo(UserPojo userPojo, String password) throws SystemException {
+		LOG.info("Entered checkLoginInfo() in UserDaoDatabaseImpl...");
 		Connection conn = null;
 
 		try {
@@ -81,15 +84,18 @@ public class UserDaoDatabaseImpl implements UserDao {
 				resultSet.next();
 				userPojo.setUserId(resultSet.getInt(1));
 				System.out.println("Login succesfull!");
+				LOG.info("Exited checkLoginInfo() in UserDaoDatabaseImpl...");
 			} else {
 				System.out.println("Wrong Password.");
 				System.out.println("Please try again.");
+				LOG.info("Exited checkLoginInfo() in UserDaoDatabaseImpl...");
 				return userPojo;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new SystemException();
 		}
+		LOG.info("Exited checkLoginInfo() in UserDaoDatabaseImpl...");
 		return userPojo;
 	}
 
